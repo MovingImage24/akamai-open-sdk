@@ -1,0 +1,128 @@
+{
+  "name": "audience-analytics service",
+  "apiVersion": "v1",
+  "baseUrl": "/media-analytics/{apiVersion}/audience-analytics/",
+  "description": "audience-analytics methods in akamai open api",
+  "operations": {
+    "getAllReportPacks": {
+      "httpMethod": "GET",
+      "uri": "report-packs",
+      "responseModel" : "ReportPacks"
+    },
+    "getReportPack": {
+      "httpMethod": "GET",
+      "uri": "report-packs/{reportPackId}",
+      "responseModel" : "ReportPack",
+      "parameters" : {
+        "reportPackId" : {
+          "type": "integer",
+          "location": "uri",
+          "required": true
+        }
+      }
+    },
+    "getAllDataStores": {
+      "httpMethod": "GET",
+      "uri": "report-packs/{reportPackId}/data-stores",
+      "responseModel" : "DataStores",
+      "parameters" : {
+        "reportPackId" : {
+          "type": "integer",
+          "location": "uri",
+          "required": true
+        }
+      }
+    },
+    "getDataStore": {
+      "httpMethod": "GET",
+      "uri": "report-packs/{reportPackId}/data-stores/{dataStoreId}",
+      "responseModel" : "DataStore",
+      "parameters" : {
+        "reportPackId" : {
+          "type": "integer",
+          "location": "uri",
+          "required": true
+        },
+        "dataStoreId" : {
+          "type": "integer",
+          "location": "uri",
+          "required": true
+        }
+      }
+    },
+    "getAllDataSources": {
+      "httpMethod": "GET",
+      "uri": "report-packs/{reportPackId}/data-sources",
+      "responseModel" : "DataSources",
+      "parameters" : {
+        "reportPackId" : {
+          "type": "integer",
+          "location": "uri",
+          "required": true
+        },
+        "reportPackId" : {
+          "type": "integer",
+          "location": "query",
+          "required": true
+        }
+      }
+    },
+    "getData": {
+      "httpMethod": "GET",
+      "uri": "report-packs/{reportPackId}/data",
+      "responseModel" : "ResultData",
+      "parameters" : {
+        "reportPackId" : {
+          "type": "integer",
+          "location": "uri",
+          "required": true
+        },
+        "startDate" : {
+          "type": "string",
+          "location": "query",
+          "required": true
+        },
+        "endDate" : {
+          "type": "string",
+          "location": "query",
+          "required": true
+        },
+        "dimensions" : {
+          "type": "string",
+          "location": "query",
+          "required": true
+        },
+        "metrics" : {
+          "type": "string",
+          "location": "query",
+          "required": true
+        }
+      }
+    }
+  },
+  "models": {
+    "ReportPack" : {
+      "class" : "Mi\\Akamai\\SDK\\Model\\ReportPack"
+    },
+    "ReportPacks" : {
+      "class" : "array<Mi\\Akamai\\SDK\\Model\\ReportPack>",
+      "version" : "1.0"
+    },
+    "DataStores" : {
+      "class" : "array<Mi\\Akamai\\SDK\\Model\\DataStore>",
+      "version" : "1.0"
+    },
+    "DataStore" : {
+      "class" : "Mi\\Akamai\\SDK\\Model\\DataStore",
+      "version" : "1.0"
+    },
+    "DataSources" : {
+      "class" : "array<Mi\\Akamai\\SDK\\Model\\DataSource>",
+      "version" : "1.0"
+    },
+    "ResultData" : {
+      "class" : "Mi\\Akamai\\SDK\\Model\\ResultData",
+      "version" : "1.0"
+    }
+  }
+}

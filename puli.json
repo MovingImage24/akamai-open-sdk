@@ -1,0 +1,7 @@
+{
+    "version": "1.0",
+    "name": "mi/akamai-open-sdk",
+    "path-mappings": {
+        "/mi/akamai-open-sdk": "resources"
+    }
+}

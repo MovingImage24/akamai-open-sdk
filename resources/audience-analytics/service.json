@@ -1,0 +1,8 @@
+{
+  "services": {
+    "audience-analytics": {
+      "class": "Mi\\Akamai\\SDK\\AudienceAnalytics\\AudienceAnalyticsService",
+      "description" : "/mi/akamai-open-sdk/audience-analytics/audience-analytics-1.0.json"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<serializer>
+  <class name="Mi\Akamai\SDK\Model\ReportPack" exclusion-policy="ALL">
+    <property name="name" type="string" since-version="1.0" expose="true" />
+    <property name="id" type="integer" since-version="1.0" expose="true" />
+    <property name="active" serialized-name="isActive" type="boolean" since-version="1.0" expose="true" />
+    <property name="type" type="string" since-version="1.0" expose="true" />
+    <property name="subType" type="string" since-version="1.0" expose="true" />
+    <property name="timezone" type="string" since-version="1.0" expose="true" />
+    <property name="dataSources" serialized-name="dataSources" since-version="1.0" expose="true">
+      <type><![CDATA[array<Mi\Akamai\SDK\Model\DataSource>]]></type>
+    </property>
+    <property name="dataStores" serialized-name="dataStores" since-version="1.0" expose="true">
+      <type><![CDATA[array<Mi\Akamai\SDK\Model\DataStore>]]></type>
+    </property>
+    <property name="dimensions" since-version="1.0" expose="true">
+      <type><![CDATA[array<Mi\Akamai\SDK\Model\Dimension>]]></type>
+    </property>
+    <property name="metrics" since-version="1.0" expose="true">
+      <type><![CDATA[array<Mi\Akamai\SDK\Model\Metric>]]></type>
+    </property>
+  </class>
+</serializer>

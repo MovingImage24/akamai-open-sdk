@@ -1,0 +1,41 @@
+{
+  "name": "mi/akamai-open-sdk",
+  "description": "SDK for the Akamai Open API",
+  "license": "MIT",
+  "type": "library",
+  "keywords": [
+    "sdk",
+    "akamai",
+    "akamai open",
+    "media analytics"
+  ],
+  "authors": [
+    {
+      "name": "Alexander Miehe",
+      "email": "alexander.miehe@movingimage.com"
+    }
+  ],
+  "minimum-stability": "beta",
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "require": {
+    "mi/guzzle-service-builder": "~1.0@dev",
+    "mi/metadata-puli-file-locator": "~1.0@dev"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mi\\Akamai\\SDK\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Mi\\Akamai\\SDK\\Tests\\": "tests/"
+    }
+  }
+}

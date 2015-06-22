@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<serializer>
+  <class name="Mi\Akamai\SDK\Model\DataStore" exclusion-policy="ALL">
+    <property name="name" type="string" since-version="1.0" expose="true" />
+    <property name="id" type="integer" since-version="1.0" expose="true" />
+    <property name="type" type="string" since-version="1.0" expose="true" />
+    <property name="description" type="string" since-version="1.0" expose="true" />
+    <property name="aggregationInSeconds" serialized-name="aggregationInSeconds" type="integer" since-version="1.0" expose="true" />
+    <property name="purgeIntervalInDays" serialized-name="purgeIntervalInDays" type="integer" since-version="1.0" expose="true" />
+    <property name="maxQueryDurationInMinutes" serialized-name="maxQueryDurationInMinutes" type="integer" since-version="1.0" expose="true" />
+    <property name="dimensions" since-version="1.0" expose="true">
+      <type><![CDATA[array<Mi\Akamai\SDK\Model\Dimension>]]></type>
+    </property>
+    <property name="metrics" since-version="1.0" expose="true">
+      <type><![CDATA[array<Mi\Akamai\SDK\Model\Metric>]]></type>
+    </property>
+  </class>
+</serializer>
