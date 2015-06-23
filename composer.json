@@ -22,8 +22,8 @@
     }
   },
   "require": {
-    "mi/guzzle-service-builder": "~1.0@dev",
-    "mi/metadata-puli-file-locator": "~1.0@dev"
+    "mi/guzzle-service-builder": "~1.0",
+    "mi/metadata-puli-file-locator": "~1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^4.7"
