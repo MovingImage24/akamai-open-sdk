@@ -15,7 +15,7 @@ use Mi\Akamai\SDK\Model\ResultData;
  */
 class AudienceAnalyticsService extends GuzzleClient
 {
-    const DATE_FORMAT = 'MM/DD/YY:HH:II';
+    const DATE_FORMAT = 'm/d/Y:H:i';
 
     /**
      * @return ReportPack[]
