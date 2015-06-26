@@ -4,6 +4,7 @@ namespace Mi\Akamai\SDK\Tests\Common;
 
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
 use GuzzleHttp\Event\Emitter;
+use Mi\Akamai\SDK\Common\Token\AkamaiTokenInterface;
 use Mi\Guzzle\ServiceBuilder\ServiceFactoryInterface;
 use Mi\Akamai\SDK\Common\ServiceFactory;
 use Mi\Akamai\SDK\Common\Subscriber\EdgeGridAuthentication;
@@ -22,7 +23,8 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     public function factory()
     {
         $baseFactory = $this->prophesize(ServiceFactoryInterface::class);
-        $serviceFactory = new ServiceFactory($baseFactory->reveal(), 'clientToken', 'clientSecret', 'accessToken');
+        $akamaiToken = $this->prophesize(AkamaiTokenInterface::class);
+        $serviceFactory = new ServiceFactory($baseFactory->reveal(), $akamaiToken->reveal());
         $client = $this->prophesize(GuzzleClient::class);
         $emitter = $this->prophesize(Emitter::class);
 

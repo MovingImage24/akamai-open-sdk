@@ -3,6 +3,7 @@
 namespace Mi\Akamai\SDK\Common;
 
 use Mi\Akamai\SDK\Common\Subscriber\EdgeGridAuthentication;
+use Mi\Akamai\SDK\Common\Token\AkamaiTokenInterface;
 use Mi\Guzzle\ServiceBuilder\ServiceFactoryInterface as GuzzleServiceFactoryInterface;
 use Mi\Guzzle\ServiceBuilder\ServiceFactoryInterface;
 
@@ -12,26 +13,16 @@ use Mi\Guzzle\ServiceBuilder\ServiceFactoryInterface;
 class ServiceFactory implements ServiceFactoryInterface
 {
     private $baseServiceFactory;
-    private $clientToken;
-    private $clientSecret;
-    private $accessToken;
+    private $akamaiToken;
 
     /**
      * @param GuzzleServiceFactoryInterface $baseServiceFactory
-     * @param string                        $clientToken
-     * @param string                        $clientSecret
-     * @param string                        $accessToken
+     * @param AkamaiTokenInterface          $akamaiToken
      */
-    public function __construct(
-        GuzzleServiceFactoryInterface $baseServiceFactory,
-        $clientToken,
-        $clientSecret,
-        $accessToken
-    ) {
+    public function __construct(GuzzleServiceFactoryInterface $baseServiceFactory, AkamaiTokenInterface $akamaiToken)
+    {
         $this->baseServiceFactory = $baseServiceFactory;
-        $this->clientToken        = $clientToken;
-        $this->clientSecret       = $clientSecret;
-        $this->accessToken        = $accessToken;
+        $this->akamaiToken        = $akamaiToken;
     }
 
     /**
@@ -40,7 +31,7 @@ class ServiceFactory implements ServiceFactoryInterface
     public function factory($config)
     {
         $service = $this->baseServiceFactory->factory($config);
-        $service->getEmitter()->attach(new EdgeGridAuthentication($this->clientToken, $this->clientSecret, $this->accessToken));
+        $service->getEmitter()->attach(new EdgeGridAuthentication($this->akamaiToken));
 
         return $service;
     }

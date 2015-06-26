@@ -4,8 +4,8 @@ namespace Mi\Akamai\SDK\Common\Subscriber;
 
 use GuzzleHttp\Command\Event\PreparedEvent;
 use GuzzleHttp\Event\SubscriberInterface;
-use GuzzleHttp\Message\Request;
-use Symfony\Component\VarDumper\VarDumper;
+use GuzzleHttp\Message\RequestInterface;
+use Mi\Akamai\SDK\Common\Token\AkamaiTokenInterface;
 
 /**
  * @author Alexander Miehe <alexander.miehe@movingimage.com>
@@ -13,20 +13,14 @@ use Symfony\Component\VarDumper\VarDumper;
 class EdgeGridAuthentication implements SubscriberInterface
 {
     private $timestamp;
-    private $clientToken;
-    private $clientSecret;
-    private $accessToken;
+    private $akamaiToken;
 
     /**
-     * @param string $clientToken
-     * @param string $clientSecret
-     * @param string $accessToken
+     * @param AkamaiTokenInterface $akamaiToken
      */
-    public function __construct($clientToken, $clientSecret, $accessToken)
+    public function __construct(AkamaiTokenInterface $akamaiToken)
     {
-        $this->clientToken  = $clientToken;
-        $this->clientSecret = $clientSecret;
-        $this->accessToken  = $accessToken;
+        $this->akamaiToken = $akamaiToken;
     }
 
     /**
@@ -43,8 +37,8 @@ class EdgeGridAuthentication implements SubscriberInterface
         $nonce           = bin2hex(openssl_random_pseudo_bytes(16));
 
         $authHeader = 'EG1-HMAC-SHA256 ' .
-            'client_token=' . $this->clientToken . ';' .
-            'access_token=' . $this->accessToken . ';' .
+            'client_token=' . $this->akamaiToken->getClientToken() . ';' .
+            'access_token=' . $this->akamaiToken->getAccessToken() . ';' .
             'timestamp=' . $this->timestamp . ';' .
             'nonce=' . $nonce . ';';
 
@@ -61,11 +55,11 @@ class EdgeGridAuthentication implements SubscriberInterface
      * Returns a signature of the given request, timestamp and auth header
      *
      * @param string  $authHeader
-     * @param Request $request
+     * @param RequestInterface $request
      *
      * @return string
      */
-    private function signRequest($authHeader, Request $request)
+    private function signRequest($authHeader, RequestInterface $request)
     {
         $signature = $this->makeBase64HmacSha256(
             $this->makeDataToSign($authHeader, $request),
@@ -82,7 +76,7 @@ class EdgeGridAuthentication implements SubscriberInterface
      */
     private function makeSigningKey()
     {
-        return $this->makeBase64HmacSha256($this->timestamp, $this->clientSecret);
+        return $this->makeBase64HmacSha256($this->timestamp, $this->akamaiToken->getClientSecret());
     }
 
     /**
@@ -102,11 +96,11 @@ class EdgeGridAuthentication implements SubscriberInterface
      * Returns a string with all data that will be signed
      *
      * @param string  $authHeader
-     * @param Request $request
+     * @param RequestInterface $request
      *
      * @return string
      */
-    private function makeDataToSign($authHeader, Request $request)
+    private function makeDataToSign($authHeader, RequestInterface $request)
     {
         $data_to_sign = array(
             $request->getMethod(),

@@ -5,6 +5,7 @@ namespace Mi\Akamai\SDK\Tests\Common\Subscriber;
 use GuzzleHttp\Command\Event\PreparedEvent;
 use GuzzleHttp\Message\Request;
 use Mi\Akamai\SDK\Common\Subscriber\EdgeGridAuthentication;
+use Mi\Akamai\SDK\Common\Token\AkamaiTokenInterface;
 use Prophecy\Argument;
 
 /**
@@ -19,7 +20,13 @@ class EdgeGridAuthenticationTest extends \PHPUnit_Framework_TestCase
      */
     public function prepare()
     {
-        $authenticator = new EdgeGridAuthentication('token', 'secret', 'access');
+
+        $akamaiToken = $this->prophesize(AkamaiTokenInterface::class);
+        $authenticator = new EdgeGridAuthentication($akamaiToken->reveal());
+
+        $akamaiToken->getClientToken()->willReturn('token');
+        $akamaiToken->getClientSecret()->willReturn('secret');
+        $akamaiToken->getAccessToken()->willReturn('access');
 
         $event = $this->prophesize(PreparedEvent::class);
         $request = $this->prophesize(Request::class);
@@ -41,6 +48,9 @@ class EdgeGridAuthenticationTest extends \PHPUnit_Framework_TestCase
      */
     public function getEvents()
     {
-        self::assertInternalType('array', (new EdgeGridAuthentication('token', 'secret', 'access'))->getEvents());
+        $akamaiToken = $this->prophesize(AkamaiTokenInterface::class);
+        $authenticator = new EdgeGridAuthentication($akamaiToken->reveal());
+
+        self::assertInternalType('array', $authenticator->getEvents());
     }
 }
