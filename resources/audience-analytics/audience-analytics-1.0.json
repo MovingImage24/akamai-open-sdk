@@ -1,7 +1,7 @@
 {
   "name": "audience-analytics service",
   "apiVersion": "v1",
-  "baseUrl": "/media-analytics/{apiVersion}/audience-analytics/",
+  "baseUrl": "/media-analytics/v1/audience-analytics/",
   "description": "audience-analytics methods in akamai open api",
   "operations": {
     "getAllReportPacks": {
@@ -59,11 +59,6 @@
           "type": "integer",
           "location": "uri",
           "required": true
-        },
-        "reportPackId" : {
-          "type": "integer",
-          "location": "query",
-          "required": true
         }
       }
     },
@@ -96,6 +91,14 @@
           "type": "string",
           "location": "query",
           "required": true
+        },
+        "filter" : {
+          "type": "array",
+          "location": "query",
+          "sentAs": "filterParams",
+          "filters": [
+            "Mi\\Akamai\\SDK\\Common\\Filter\\Json::encode"
+          ]
         }
       }
     }
