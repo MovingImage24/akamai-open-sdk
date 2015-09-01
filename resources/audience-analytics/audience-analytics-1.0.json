@@ -92,6 +92,11 @@
           "location": "query",
           "required": true
         },
+        "aggregation" : {
+          "type": "string",
+          "location": "query",
+          "required": false
+        },
         "filter" : {
           "type": "array",
           "location": "query",

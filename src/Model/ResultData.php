@@ -28,4 +28,12 @@ class ResultData
     {
         return $this->columns;
     }
+
+    /**
+     * @return String[]
+     */
+    public function getMetaData()
+    {
+        return $this->metaData;
+    }
 }
