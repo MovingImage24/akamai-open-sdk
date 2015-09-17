@@ -97,6 +97,24 @@
           "location": "query",
           "required": false
         },
+        "limit" : {
+          "type": "integer",
+          "location": "query",
+          "required": false
+        },
+        "offset" : {
+          "type": "integer",
+          "location": "query",
+          "required": false
+        },
+        "sort" : {
+          "type": "array",
+          "location": "query",
+          "sentAs": "sortParams",
+          "filters": [
+            "Mi\\Akamai\\SDK\\Common\\Filter\\Json::encode"
+          ]
+        },
         "filter" : {
           "type": "array",
           "location": "query",
