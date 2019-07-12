@@ -1,7 +1,7 @@
 {
   "name": "audience-analytics service",
   "apiVersion": "v1",
-  "baseUrl": "/media-analytics/v1/audience-analytics/",
+  "baseUrl": "/media-analytics/v2/audience-analytics/",
   "description": "audience-analytics methods in akamai open api",
   "operations": {
     "getAllReportPacks": {
